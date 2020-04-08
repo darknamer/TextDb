@@ -4,6 +4,8 @@ namespace TextDb.Configs.Extensions
 {
     public static class TimesheetExtension
     {
+        public const string Format = "yyyy-MM-dd HH:mm:ss";
+        
         public static string ToText(this Timesheet timesheet)
         {
             return string.Join('|', new string []

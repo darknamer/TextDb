@@ -43,6 +43,12 @@ namespace TextDb
             services.AddControllersWithViews();
             
             services.AddSwaggerConfiguration();
+
+            services.AddAutomapperConfiguration();
+            
+            services.AddCorsConfiguration();
+            
+            services.AddMvcConfiguration();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,15 +72,12 @@ namespace TextDb
             app.UseStaticFiles();
 
             app.UseRouting();
+            
+            app.UseCorsConfiguration();
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseMvcConfiguration();
         }
     }
 }

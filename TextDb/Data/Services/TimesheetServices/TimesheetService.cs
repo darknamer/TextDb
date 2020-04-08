@@ -9,11 +9,10 @@ namespace TextDb.Data.Services.TimesheetServices
 {
     public interface ITimesheetService
     {
-        string[] ReadAllLines();
         IEnumerable<Timesheet> GetAll();
-        int NewId();
+        Timesheet GetById(int id);
         Timesheet Insert(Timesheet timesheet);
-        Timesheet Modify(Timesheet timesheet);
+        Timesheet Update(Timesheet timesheet);
         void Delete(Timesheet timesheet);
     }
 
@@ -27,7 +26,9 @@ namespace TextDb.Data.Services.TimesheetServices
             _path = Path.Combine(AppContext.BaseDirectory, "Db.txt");
         }
 
-        public string[] ReadAllLines()
+        #region private methods
+
+        private string[] ReadAllLines()
         {
             string[] texts;
             lock (LockPermission)
@@ -38,17 +39,7 @@ namespace TextDb.Data.Services.TimesheetServices
             return texts;
         }
 
-        public IEnumerable<Timesheet> GetAll()
-        {
-            var texts = ReadAllLines();
-            var timesheets = texts
-                .Select(x => x.ToTimesheet())
-                .OrderBy(x => x.Id)
-                .ToList();
-            return timesheets;
-        }
-
-        public int NewId()
+        private int NewId()
         {
             var texts = ReadAllLines();
             if (texts.Length <= 0)
@@ -62,25 +53,47 @@ namespace TextDb.Data.Services.TimesheetServices
             return timesheet.Id + 1;
         }
 
+        #endregion
+        
+        public IEnumerable<Timesheet> GetAll()
+        {
+            var texts = ReadAllLines();
+            var timesheets = texts
+                .Select(x => x.ToTimesheet())
+                .OrderBy(x => x.Id)
+                .ToList();
+            return timesheets;
+        }
+
+        public Timesheet GetById(int id)
+        {
+            return GetAll()
+                .Where(x => x.Id == id)
+                .OrderBy(x => x.Id)
+                .FirstOrDefault();
+        }
+
         public Timesheet Insert(Timesheet timesheet)
         {
-            var newId = NewId();
-            timesheet.Id = newId;
-
             var timesheets = GetAll()
                 .OrderBy(x => x.Id)
-                .Select(X => X.ToText())
                 .ToList();
+            
+            timesheet.Id = NewId();
+            timesheet.CreatedDate = DateTime.Now.ToString(TimesheetExtension.Format);
+            timesheets.Add(timesheet);
+
+            var texts = timesheets.Select(x => x.ToText()).ToList();
             
             lock (LockPermission)
             {
-                File.WriteAllLines(_path, timesheets);
+                File.WriteAllLines(_path, texts);
             }
 
             return timesheet;
         }
 
-        public Timesheet Modify(Timesheet timesheet)
+        public Timesheet Update(Timesheet timesheet)
         {
             var timesheets = GetAll().ToList();
             if (timesheets.All(x => x.Id != timesheet.Id))
