@@ -2,92 +2,96 @@
     ViewData["Title"] = "Welcome Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Timesheet</h1>
-</div>
-<hr>
+@* <div class="text-center"> *@
+@*     <h1 class="display-4">Timesheet</h1> *@
+@* </div> *@
+@* <br> *@
 
 <div ng-controller="appCtrl" ng-init="init()">
     <div class="row">
         <div class="col-sm-12">
-            <form name="form" ng-submit="form.$valid && submit()">
-                <div class="row">
-                    <div class="col-sm-12 col-md-6">
-                        <div class="form-group row">
-                            <label for="id" class="col-sm-4 col-form-label">Id</label>
-                            <div class="col-sm-6">
-                                <input type="number" class="form-control" id="id"
-                                       ng-readonly="true"
-                                       ng-model="timesheet.id"
-                                       ng-required="true">
+            <div class="card">
+                <div class="card-body">
+                    <form name="form" ng-submit="form.$valid && submit()">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group row">
+                                    <label for="id" class="col-sm-4 col-form-label">Id</label>
+                                    <div class="col-sm-6">
+                                        <input type="number" class="form-control" id="id"
+                                               ng-readonly="true"
+                                               ng-model="timesheet.id"
+                                               ng-required="true">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group row">
+                                    <label for="username" class="col-sm-4 col-form-label">Username</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="username"
+                                               ng-model="timesheet.username"
+                                               ng-required="true"
+                                               ng-maxlength="255">
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6">
-                        <div class="form-group row">
-                            <label for="username" class="col-sm-4 col-form-label">Username</label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="username"
-                                       ng-model="timesheet.username"
-                                       ng-required="true"
-                                       ng-maxlength="255">
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-sm-12 col-md-6">
-                        <div class="form-group row">
-                            <label for="description" class="col-sm-4 col-form-label">Description</label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="description"
-                                       ng-model="timesheet.description"
-                                       ng-required="true"
-                                       ng-maxlength="255">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group row">
+                                    <label for="description" class="col-sm-4 col-form-label">Description</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="description"
+                                               ng-model="timesheet.description"
+                                               ng-required="true"
+                                               ng-maxlength="255">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group row">
+                                    <label for="projectId" class="col-sm-4 col-form-label">Project Id</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="projectId"
+                                               ng-model="timesheet.projectId"
+                                               ng-required="true"
+                                               ng-maxlength="255">
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6">
-                        <div class="form-group row">
-                            <label for="projectId" class="col-sm-4 col-form-label">Project Id</label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="projectId"
-                                       ng-model="timesheet.projectId"
-                                       ng-required="true"
-                                       ng-maxlength="255">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group row">
+                                    <label for="hours" class="col-sm-4 col-form-label">Hours</label>
+                                    <div class="col-sm-6">
+                                        <input type="number" class="form-control" id="hours" step="0.5" min="0.5" max="24"
+                                               ng-model="timesheet.hours"
+                                               ng-required="true">
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12 col-md-6">
-                        <div class="form-group row">
-                            <label for="hours" class="col-sm-4 col-form-label">Hours</label>
-                            <div class="col-sm-6">
-                                <input type="number" class="form-control" id="hours" step="0.5" min="0.5" max="24"
-                                       ng-model="timesheet.hours"
-                                       ng-required="true">
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-sm-12 col-md-6">
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label"></label>
-                            <div class="col-sm-6">
-                                <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">Submit</button>
-                                <button type="button" class="btn btn-warning" ng-click="clear()">Clear</button>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label"></label>
+                                    <div class="col-sm-6">
+                                        <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">Submit</button>
+                                        <button type="button" class="btn btn-warning" ng-click="clear()">Clear</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
-    <hr>
+    <br>
 
     <div class="row">
         <div class="col-sm-12">
