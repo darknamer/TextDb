@@ -50,7 +50,7 @@ angular.module('application', [])
             };
             
             $scope.clear = function () {
-                $scope.timesheet = $scope.getTimesheetModel();
+                $scope.getTimesheetModel();
             };
 
             $scope.submit = function () {
