@@ -12,7 +12,7 @@ namespace TextDb.Configs.Configurations
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "Text Db", 
+                    Title = "TextDb", 
                     Version = "v1"
                 });
             });
@@ -27,7 +27,7 @@ namespace TextDb.Configs.Configurations
             // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(config =>
             {
-                config.SwaggerEndpoint("/swagger/v1/swagger.json", "Text Db Api V1");
+                config.SwaggerEndpoint("/swagger/v1/swagger.json", "TextDb Api V1");
             });
         }
     }
