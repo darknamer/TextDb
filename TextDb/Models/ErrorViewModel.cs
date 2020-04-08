@@ -1,5 +1,3 @@
-using System;
-
 namespace TextDb.Models
 {
     public class ErrorViewModel

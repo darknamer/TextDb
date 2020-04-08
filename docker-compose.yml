@@ -1,0 +1,10 @@
+version: '3.4'
+services:
+  textdb:
+    image: zeneros.com:5000/textdb:dev
+    container_name: textdb_dev
+    build: 
+      dockerfile: ./dockers/dev/Dockerfile
+      context: .
+    ports:
+    - "5055:80"
