@@ -4,7 +4,7 @@ using Microsoft.OpenApi.Models;
 
 namespace TextDb.Configs.Configurations
 {
-    public static class SwaggerConfiguration
+    public static class ConfigSwagger
     {
         public static void AddSwaggerConfiguration(this IServiceCollection services)
         {
