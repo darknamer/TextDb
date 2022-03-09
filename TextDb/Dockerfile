@@ -1,10 +1,14 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS Build
+FROM unnamed22090/dotnet:sdk-3.1 AS Build
 WORKDIR /app
-COPY . .
+
+COPY TextDb/TextDb.csproj TextDb/TextDb.csproj
+COPY TextDb.sln TextDb.sln
 RUN dotnet restore
+
+COPY . .
 RUN dotnet publish -c Release -o /out ./TextDb/TextDb.csproj
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-bionic AS Runtime
+FROM unnamed22090/dotnet:aspnet-3.1 AS Runtime
 WORKDIR /app
 COPY --from=Build /out  .
 ENTRYPOINT ["dotnet", "TextDb.dll"]
