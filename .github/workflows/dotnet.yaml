@@ -1,0 +1,26 @@
+name: dotnet
+
+on:
+  push:
+    branches:
+      - 'main'
+      - 'master'
+      - 'develop'
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dotnet: [ '3.1.x' ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ matrix.dotnet }}
+      - name: Dotnet nuget restore
+        run: dotnet restore
+      - name: Dotnet publish
+        run: dotnet publish -c Release ./TextDb/TextDb.csproj
