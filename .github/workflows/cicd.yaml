@@ -36,7 +36,6 @@ jobs:
           push: true
           tags: |
             ghcr.io/darknamer/textdb:latest
-            ghcr.io/darknamer/textdb:${{ github.sha }}
 
       - uses: azure/setup-kubectl@v2.0
 
