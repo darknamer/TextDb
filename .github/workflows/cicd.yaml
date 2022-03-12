@@ -45,11 +45,6 @@ jobs:
           creds: "${{ secrets.AZURE_CREDENTIALS }}"
           cluster-name: aks-demo
           resource-group: rg-aks
-      - uses: Azure/k8s-deploy@v1.2
-        with: 
-          manifests: |
-            chart/namespace-secret.yaml
-      # - run: kubectl apply -f .chart/namespace-secret.yaml
       # - uses: Azure/k8s-create-secret@v1.1
       #   with:
       #     namespace: ${{ env.NAMESPACE  }}
@@ -62,6 +57,7 @@ jobs:
           renderEngine: "helm"
           helmChart: ".chart/"
           helm-version: "latest"
+        id: deploy
       # - uses: Azure/k8s-deploy@v1.2
       #   with:
       #     action: deploy
