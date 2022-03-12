@@ -39,11 +39,11 @@ jobs:
       - uses: azure/setup-kubectl@v2.0
 
       # Set the target AKS cluster.
-#      - uses: Azure/aks-set-context@v1
-#        with:
-#          creds: "${{ secrets.AZURE_CREDENTIALS }}"
-#          cluster-name: aks-demo
-#          resource-group: rg-aks
+      - uses: Azure/aks-set-context@v1
+        with:
+          creds: "${{ secrets.AZURE_CREDENTIALS }}"
+          cluster-name: aks-demo
+          resource-group: rg-aks
 #      - uses: Azure/k8s-create-secret@v1.1
 #        with:
 #          namespace: ${{ env.NAMESPACE  }}
