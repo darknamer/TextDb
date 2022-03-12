@@ -37,6 +37,7 @@ jobs:
       #       ghcr.io/darknamer/textdb:latest
 
       - uses: azure/setup-kubectl@v2.0
+        id: install
 
       # Set the target AKS cluster.
       - uses: Azure/aks-set-context@v1
@@ -51,10 +52,14 @@ jobs:
       #     container-registry-username: ${{ secrets.REGISTRY_USERNAME }}
       #     container-registry-password: ${{ secrets.REGISTRY_PASSWORD }}
       #     secret-name: demo-k8s-secret
+      - uses: Azure/k8s-deploy@v1
+        with:
+          manifests: |
+            .chart/namespace-secret.yaml
       - uses: azure/k8s-bake@v2
         with:
           renderEngine: "helm"
-          helmChart: "./chart/"
+          helmChart: ".chart/"
           helm-version: "latest"
       # - uses: Azure/k8s-deploy@v1.2
       #   with:
