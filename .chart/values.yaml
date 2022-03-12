@@ -57,7 +57,7 @@ ingress:
   hosts:
     - host: textdb.darknamer.xyz
       paths: 
-        - (/|$)(.*)
+        - /(.*)
   tls: []
 #   - secretName: textdb-secret
 #     hosts:
