@@ -3,7 +3,6 @@ name: dotnet
 on:
   push:
     branches:
-      - 'main'
       - 'master'
       - 'develop'
 
