@@ -1,4 +1,4 @@
-name: ci
+name: cicd
 
 on:
   push:
@@ -51,11 +51,11 @@ jobs:
       #     container-registry-username: ${{ secrets.REGISTRY_USERNAME }}
       #     container-registry-password: ${{ secrets.REGISTRY_PASSWORD }}
       #     secret-name: demo-k8s-secret
-      # - uses: azure/k8s-bake@v2
-      #   with:
-      #     renderEngine: "helm"
-      #     helmChart: "./chart/"
-      #     helm-version: "latest"
+      - uses: azure/k8s-bake@v2
+        with:
+          renderEngine: "helm"
+          helmChart: "./chart/"
+          helm-version: "latest"
       # - uses: Azure/k8s-deploy@v1.2
       #   with:
       #     action: deploy
