@@ -46,7 +46,10 @@ jobs:
           cluster-name: aks-demo
           resource-group: rg-aks
       - uses: Azure/k8s-deploy@v1.2
-      - run: kubectl apply -f .chart/namespace-secret.yaml
+        with: 
+          manifests: |
+            chart/namespace-secret.yaml
+      # - run: kubectl apply -f .chart/namespace-secret.yaml
       # - uses: Azure/k8s-create-secret@v1.1
       #   with:
       #     namespace: ${{ env.NAMESPACE  }}
