@@ -27,42 +27,26 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      # - name: Build and push
-      #   uses: docker/build-push-action@v2
-      #   with:
-      #     context: .
-      #     file: ./TextDb/Dockerfile
-      #     push: true
-      #     tags: |
-      #       ghcr.io/darknamer/textdb:latest
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./TextDb/Dockerfile
+          push: true
+          tags: |
+            ghcr.io/darknamer/textdb:latest
 
       - uses: azure/setup-kubectl@v2.0
-        id: install
-
-      # Set the target AKS cluster.
       - uses: Azure/aks-set-context@v1
         with:
           creds: "${{ secrets.AZURE_CREDENTIALS }}"
           cluster-name: aks-demo
           resource-group: rg-aks
-      # - uses: Azure/k8s-create-secret@v1.1
-      #   with:
-      #     namespace: ${{ env.NAMESPACE  }}
-      #     container-registry-url: contoso.azurecr.io
-      #     container-registry-username: ${{ secrets.REGISTRY_USERNAME }}
-      #     container-registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-      #     secret-name: demo-k8s-secret
       - uses: azure/k8s-bake@v2
         with:
           renderEngine: "helm"
           helmChart: ".chart/"
           helm-version: "latest"
-        id: deploy
-      # - uses: Azure/k8s-deploy@v1.2
-      #   with:
-      #     action: deploy
-      #     manifests: ${{ steps.bake.outputs.manifestsBundle }}
-      #     images: |
-      #       contoso.azurecr.io/k8sdemo:${{ github.sha }}
-      #     imagepullsecrets: |
-      #       demo-k8s-secret
+      - uses: Azure/k8s-deploy@v1.2
+        with:
+          action: deploy
