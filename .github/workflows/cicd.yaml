@@ -50,5 +50,6 @@ jobs:
         id: bake
       - uses: Azure/k8s-deploy@v1.2
         with:
+          namespace: "textdb"
           action: deploy
           manifests: ${{ steps.bake.outputs.manifestsBundle }}
