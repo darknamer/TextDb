@@ -37,7 +37,7 @@ jobs:
           tags: |
             ghcr.io/darknamer/textdb:latest
 
-      - uses: azure/setup-kubectl@v2.0
+      - uses: azure/setup-kubectl@v3.0
 
       # Set the target AKS cluster.
       # - uses: Azure/aks-set-context@v1
